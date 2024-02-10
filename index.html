@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page avec Code Secret</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            background: url(fond-papier-grunge.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Times New Roman', serif;
+            /* Ou une autre police de style médiéval */
+        }
+
+        .button-medieval {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #a67c52;
+            /* Couleur boisée ou terreuse */
+            border: 2px solid #6b4700;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px #000;
+            transition: all 0.3s ease;
+        }
+
+        .button-medieval:hover {
+            background-color: #9b6a30;
+        }
+
+        #startDiv,
+        .codeDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #codeInput {
+            margin-top: 60vh;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #codeInput input {
+            background: #ff557f;
+            border: solid 3px #9f5765;
+            width: 5vw;
+            height: 20vh;
+            font-size: 70px;
+            text-align: center;
+        }
+
+        .gifDiv {
+            width: 30vw;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="startDiv">
+        <button type="button" class="button-medieval" id="enterButton">Entrée</button>
+    </div>
+    <div class="codeDiv" style="display:none;">
+        <div id="codeInput">
+            <input type="text" id="input1" maxlength="1">
+            <input type="text" id="input2" maxlength="1">
+            <input type="text" id="input3" maxlength="1">
+            <input type="text" id="input4" maxlength="1">
+            <input type="text" id="input5" maxlength="1">
+            <input type="text" id="input6" maxlength="1">
+            <input type="text" id="input7" maxlength="1">
+            <input type="text" id="input8" maxlength="1">
+            <input type="text" id="input9" maxlength="1">
+
+        </div>
+        <div id="resultText" style="margin-top: 20px; font-size: 50px;"></div>
+    </div>
+    <div class="gifDiv" style="display:none;">
+        <img id="statusGif" src="lock-infinity.gif" alt="">
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#enterButton').click(function () {
+                $('.codeDiv').show();
+                $('.gifDiv').show();
+                $('#startDiv').hide();
+            });
+
+            // Fonction pour vérifier la longueur totale des inputs et valider le code
+            function checkAndVerifyCode() {
+                var codeEntree = $('#input1').val() + $('#input2').val() + $('#input3').val() + $('#input4').val() + $('#input5').val() + $('#input6').val() + $('#input7').val() + $('#input8').val() + $('#input9').val();
+                codeEntree = codeEntree.toLowerCase(); // Convertit le code entré en minuscules
+                if (codeEntree.length === 9) { // Vérifie si tous les champs sont remplis
+                    verifierCode(codeEntree);
+                }
+            }
+            $('#codeInput input').keyup(function (e) {
+                if ($(this).val().length > 1) {
+                    $(this).val($(this).val().charAt(0));
+                }
+                if ($(this).val().length == this.maxLength) {
+                    $(this).next('input').focus();
+                }
+                checkAndVerifyCode();
+            });
+
+            function verifierCode(codeEntree) {
+                var codeCorrect = "alohomora";
+                if (codeEntree === codeCorrect) {
+                    $('#resultText').text("Code correct !").css('color', 'green');
+                    $('#statusGif').attr('src', 'alohomora-wand.gif');
+                } else {
+                    $('#resultText').text("Code incorrect, essayez à nouveau.").css('color', 'red');
+                    $('#statusGif').attr('src', 'eye-roll-harry-potter.gif');
+                    $('#codeInput input').val('');
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
