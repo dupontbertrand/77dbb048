@@ -171,7 +171,7 @@
             function verifierCode(codeEntree) {
                 var codeCorrect = "alohomora";
                 if (codeEntree === codeCorrect) {
-                    $('#resultText').text("Code correct !").css('color', 'green');
+                    $('#resultText').html("<img src='circle-green.png' alt='Code correct' style='height:10vh;width:auto;'/>").css('color', 'green');
                     $('#statusGif').attr('src', 'alohomora-wand.gif');
                 } else {
                     $('#resultText').text("Code incorrect, essayez à nouveau.").css('color', 'red');
